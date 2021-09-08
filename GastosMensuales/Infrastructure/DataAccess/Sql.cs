@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GastosMensuales.Infrastructure.DataAccess
 {
-    public class Sql: IDataAccess
+    public class Sql : IDataAccess
     {
         public static string strConexion = ConfigurationManager.ConnectionStrings["SQLConnectionString"].ConnectionString;
 
@@ -40,7 +40,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
             catch (SqlException)
             {
 
-                throw new Exception("ERROR EN BASE DE DATOS");
+                throw new ApplicationException("Error en conexion.");
             }
             finally
             {
@@ -75,7 +75,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
             catch (SqlException)
             {
 
-                throw new Exception("ERROR EN BASE DE DATOS");
+                throw new ApplicationException("Error en conexion.");
             }
             finally
             {
@@ -88,7 +88,13 @@ namespace GastosMensuales.Infrastructure.DataAccess
 
         public void CrearPresupuesto(Presupuesto presupuesto)
         {
-            string sql = @" INSERT INTO Presupuestos (Año,Mes,Nombre,Ingresos,Gastos,Total) VALUES (@Año,@Mes,@Nombre,@Ingresos,@Gastos,@Total)";
+            string sql = @" INSERT INTO Presupuestos (Año,Mes,Nombre,Ingresos,Gastos,Total) 
+				            SELECT @Año,@Mes,@Nombre,@Ingresos,@Gastos,@Total
+				            WHERE @Nombre NOT IN
+				            (
+					            SELECT Nombre
+					            FROM Presupuestos
+				            )";
 
             SqlConnection objConexion = new SqlConnection(strConexion);
             SqlCommand objComAgregar = new SqlCommand(sql, objConexion);
@@ -107,7 +113,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
             catch (SqlException)
             {
 
-                throw new Exception("ERROR EN BASE DE DATOS");
+                throw new ApplicationException("Error en conexion.");
             }
             finally
             {
@@ -132,7 +138,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
             catch (SqlException)
             {
 
-                throw new Exception("ERROR EN BASE DE DATOS");
+                throw new ApplicationException("Error en conexion.");
             }
             finally
             {
@@ -200,7 +206,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
             catch (SqlException)
             {
 
-                throw new Exception("ERROR EN BASE DE DATOS");
+                throw new ApplicationException("Error en conexion.");
             }
             finally
             {
@@ -239,7 +245,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
             catch (SqlException)
             {
 
-                throw new Exception("ERROR EN BASE DE DATOS");
+                throw new ApplicationException("Error en conexion.");
             }
             finally
             {
@@ -257,9 +263,9 @@ namespace GastosMensuales.Infrastructure.DataAccess
                             SET @Id_Presupuesto =(SELECT DISTINCT TOP (1) Id FROM Presupuestos WHERE Nombre = '" + presupuesto.Trim() + "' ORDER BY Id DESC)"+
                             @"SELECT g.Nombre,g.Monto 
                             FROM Gastos g INNER JOIN 
-                                 R_PresupuestoGasto pg ORDER ON g.Id = pg.Id_Gasto
-                            WHERE pg.Id_Presupuesto = @Id_Presupuesto
-                            BY g.Id DESC";
+                                 R_PresupuestoGasto pg ON g.Id = pg.Id_Gasto
+                            WHERE pg.Id_Presupuesto = @Id_Presupuesto 
+                            ORDER BY g.Id DESC";
             SqlDataAdapter objDaTraer = new SqlDataAdapter(sql, strConexion);
             objDaTraer.SelectCommand.CommandType = CommandType.Text;
             objDaTraer.Fill(dt);
@@ -273,16 +279,16 @@ namespace GastosMensuales.Infrastructure.DataAccess
                             SET @Id_Presupuesto =(SELECT DISTINCT TOP (1) Id FROM Presupuestos WHERE Nombre = '" + presupuesto.Trim() + "' ORDER BY Id DESC)" +
                             @"SELECT i.Nombre,i.Monto 
                             FROM Ingresos i INNER JOIN 
-                                 R_PresupuestoIngreso pi ORDER ON g.Id = pi.Id_Ingreso
+                                 R_PresupuestoIngreso pi ON i.Id = pi.Id_Ingreso
                             WHERE pi.Id_Presupuesto = @Id_Presupuesto
-                            BY i.Id DESC";
+                            ORDER BY i.Id DESC";
             SqlDataAdapter objDaTraer = new SqlDataAdapter(sql, strConexion);
             objDaTraer.SelectCommand.CommandType = CommandType.Text;
             objDaTraer.Fill(dt);
             return dt;
         }
 
-        public DataTable TraerNombrePresupuesto()
+        public  DataTable TraerNombrePresupuesto()
         {
             DataTable dt = new DataTable();
             string sql = "SELECT Nombre FROM Presupuestos ORDER BY Id DESC";
@@ -291,5 +297,32 @@ namespace GastosMensuales.Infrastructure.DataAccess
             objDaTraer.Fill(dt);
             return dt;
         }
+        public  int TraerUltmoMesPresupuesto()
+        {
+            int mes;
+            string sql = "SELECT TOP (1) Mes FROM Presupuestos ORDER BY Id DESC ";
+            SqlConnection objConexion = new SqlConnection(strConexion);
+            SqlCommand objComTraer = new SqlCommand(sql, objConexion);
+            objComTraer.CommandType = CommandType.Text;
+            objConexion.Open();
+            mes = Convert.ToInt32(objComTraer.ExecuteScalar());
+            objConexion.Close();
+
+            return mes;
+        }
+        public  string TraerUltmoPresupuesto()
+        {
+            string presupuesto;
+            string sql = "SELECT TOP (1) Nombre FROM Presupuestos ORDER BY Id DESC ";
+            SqlConnection objConexion = new SqlConnection(strConexion);
+            SqlCommand objComTraer = new SqlCommand(sql, objConexion);
+            objComTraer.CommandType = CommandType.Text;
+            objConexion.Open();
+            presupuesto = objComTraer.ExecuteScalar().ToString();
+            objConexion.Close();
+
+            return presupuesto;
+        }
+
     }
 }

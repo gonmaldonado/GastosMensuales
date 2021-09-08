@@ -6,9 +6,11 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
              xmlns:local="clr-namespace:GastosMensuales.Views"
+             xmlns:ViewModel="clr-namespace:GastosMensuales.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="950">
     <Control.Resources>
+        
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
@@ -30,30 +32,27 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ComboBox 
+                Name="cmbPresupuestos"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Left"
+                 ItemsSource="{Binding ListaPresupuestos, Mode=OneWay}"
+                Text="{Binding Presupuesto}"
+                 DisplayMemberPath="Nombre"
                       Padding="10"
                       Height="40"
-                      Width="200"               
+                      Width="200"    
                   materialDesign:HintAssist.Hint="Search"
                   materialDesign:HintAssist.HintOpacity=".26"
                   IsEditable="True">
-                                <ComboBoxItem
-                    Content="Apple" />
-                                <ComboBoxItem
-                    Content="Banana" />
-                                <ComboBoxItem
-                    Content="Pear" />
-                                <ComboBoxItem
-                    Content="Orange" />
+
             </ComboBox>
             <DataGrid Grid.Row="1"
-              ItemsSource="{Binding Items2}"
+              ItemsSource="{Binding TablaGastos}"
               CanUserAddRows="False"
               SelectionUnit="Cell"
               SelectionMode="Extended" />
             <DataGrid Grid.Row="2"
-              ItemsSource="{Binding Items2}"
+              ItemsSource="{Binding TablaIngresos}"
               CanUserAddRows="False"
               SelectionUnit="Cell"
               SelectionMode="Extended" />
@@ -134,7 +133,7 @@
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
                           Style="{StaticResource MaterialDesignBody2TextBlock}"
-                          Text="$1000000" />
+                          Text="{Binding Path=Ingresos, UpdateSourceTrigger =PropertyChanged}" />
                     </Grid>
                 </materialDesign:Card>
            
@@ -165,7 +164,7 @@
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
                           Style="{StaticResource MaterialDesignBody2TextBlock}"
-                          Text="$1000000" />
+                          Text="{Binding Path=Gastos, UpdateSourceTrigger =PropertyChanged}" />
                     </Grid>
                 </materialDesign:Card>
             </Grid>
@@ -196,7 +195,7 @@
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
                           Style="{StaticResource MaterialDesignBody2TextBlock}"
-                          Text="$1000000" />
+                          Text="{Binding Path=Total, UpdateSourceTrigger =PropertyChanged}" />
                     </Grid>
                 </materialDesign:Card>
                 </Grid>
