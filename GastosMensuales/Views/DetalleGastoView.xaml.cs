@@ -11,21 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GastosMensuales.Views
 {
     /// <summary>
-    /// Lógica de interacción para HomeView.xaml
+    /// Lógica de interacción para DetalleGastoView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class DetalleGastoView : Window
     {
-        public HomeView()
+        public DetalleGastoView(int valor)
         {
             InitializeComponent();
-            DataContext = new HomeViewModel();
-            
+            DataContext = new DetalleGastoViewModel(valor);
         }
 
     }

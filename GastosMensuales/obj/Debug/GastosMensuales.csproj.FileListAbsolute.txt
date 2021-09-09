@@ -449,3 +449,13 @@ C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\ru\Mic
 C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\tr\Microsoft.VisualStudio.Services.WebApi.resources.dll
 C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\zh-Hans\Microsoft.VisualStudio.Services.WebApi.resources.dll
 C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\zh-Hant\Microsoft.VisualStudio.Services.WebApi.resources.dll
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\DetalleGastoView.g.cs
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\DetalleIngresoView.g.cs
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\CrearGastoView.g.cs
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\CrearIngresoView.g.cs
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\InformeView.g.cs
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\DetalleGastoView.baml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\DetalleIngresoView.baml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\CrearGastoView.baml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\CrearIngresoView.baml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\InformeView.baml

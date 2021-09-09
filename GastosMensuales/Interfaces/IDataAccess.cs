@@ -20,9 +20,15 @@ namespace GastosMensuales.Interfaces
         DataTable TraerGastos(string presupuesto);
         DataTable TraerIngresos(string presupuesto);
         DataTable TraerNombrePresupuesto();
+        DataTable TraerTipoMonto();
+        string TraerTipoMonto(int id);
+        int TraerTipoMonto(string tipo);
+
         DataTable InformePrespuesto(string fechaDesde, string fechaHasta);
         int TraerUltmoMesPresupuesto();
         string TraerUltmoPresupuesto();
+        Ingreso TraerIngreso(int id);
+        Gasto TraerGasto(int id);
 
     }
 }

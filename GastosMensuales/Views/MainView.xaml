@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:GastosMensuales" 
         mc:Ignorable="d"
         Icon ="/Icon/GastosMensuales.png"
-        Title="GastosMensuales" Height="450" Width="1000">
+        Title="GastosMensuales" Height="450" Width="1000" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -40,7 +40,7 @@
                         />
                     <Button
                                 Margin="16,0,0,0"
-                                ToolTip="Gastos"
+                                ToolTip="Home"
                                 Command="{Binding HomeCommand}"
                                 Content="{materialDesign:PackIcon Kind=Home, Size=24}"
                                 Style="{DynamicResource MaterialDesignToolButton}"
@@ -62,9 +62,7 @@
             </DockPanel>
         </materialDesign:ColorZone>
         <Grid Grid.Row="1">
-
-                <views:HomeView />
-
+            <views:HomeView/>
         </Grid>
     </Grid>
 </Window>

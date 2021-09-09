@@ -35,27 +35,38 @@
                 Name="cmbPresupuestos"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Left"
-                 ItemsSource="{Binding ListaPresupuestos, Mode=OneWay}"
-                Text="{Binding Presupuesto}"
-                 DisplayMemberPath="Nombre"
-                      Padding="10"
-                      Height="40"
-                      Width="200"    
+                  FontSize="15"
+                  ItemsSource="{Binding ListaPresupuestos, Mode=OneWay}"
+                  Text="{Binding Presupuesto}"
+                  DisplayMemberPath="Nombre"
+                  Padding="10"
+                  Height="40"
+                  Width="200"    
                   materialDesign:HintAssist.Hint="Search"
                   materialDesign:HintAssist.HintOpacity=".26"
                   IsEditable="True">
 
             </ComboBox>
-            <DataGrid Grid.Row="1"
-              ItemsSource="{Binding TablaGastos}"
-              CanUserAddRows="False"
-              SelectionUnit="Cell"
-              SelectionMode="Extended" />
-            <DataGrid Grid.Row="2"
-              ItemsSource="{Binding TablaIngresos}"
-              CanUserAddRows="False"
-              SelectionUnit="Cell"
-              SelectionMode="Extended" />
+            <StackPanel Grid.Row="2">
+                <Label FontSize="20">Gastos</Label>
+            <DataGrid 
+                  x:Name="dgGastos" 
+                  SelectionUnit="FullRow"
+                  ItemsSource="{Binding Path= TablaGastos}"
+                  SelectedItem="{Binding Path=SeleccionarGasto,Mode=TwoWay}"
+                  IsReadOnly="True" 
+                  CanUserAddRows="False" UseLayoutRounding="False" FontSize="18"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <Label FontSize="20">Ingresos</Label>
+                <DataGrid 
+                  x:Name="dgIngresos" 
+                  SelectionUnit="FullRow"
+                  ItemsSource="{Binding Path=TablaIngresos}"
+                  SelectedItem="{Binding Path=SeleccionarIngreso,Mode=TwoWay}"
+                  IsReadOnly="True" 
+                  CanUserAddRows="False" UseLayoutRounding="False" FontSize="18" />
+            </StackPanel>
         </Grid>
         <!--COLUMNA 2-->
         <Grid Grid.Column="1">
@@ -80,7 +91,6 @@
                       Background="PaleTurquoise"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
-                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                         <TextBlock
                   Text="Crear gasto" />
@@ -94,7 +104,6 @@
                        Background="PaleTurquoise"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="25"
-                    ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                         <TextBlock
                       Text="Crear Ingreso"/>
@@ -123,7 +132,8 @@
                         <TextBlock
                           Grid.Row="0"
                           Margin="16 16 16 4"
-                          Style="{StaticResource MaterialDesignHeadline5TextBlock}"                                                      VerticalAlignment="Center"
+                          Style="{StaticResource MaterialDesignHeadline5TextBlock}"                                                      
+                          VerticalAlignment="Center"
                           HorizontalAlignment="Center"
                           Text="Ingresos" />
                         <Separator Grid.Row="1"/>

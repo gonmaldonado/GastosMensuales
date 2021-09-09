@@ -1,5 +1,4 @@
-﻿using GastosMensuales.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GastosMensuales.Views
 {
     /// <summary>
-    /// Lógica de interacción para HomeView.xaml
+    /// Lógica de interacción para IngresoView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class IngresoView : Window
     {
-        public HomeView()
+        public IngresoView()
         {
             InitializeComponent();
-            DataContext = new HomeViewModel();
-            
         }
-
     }
 }

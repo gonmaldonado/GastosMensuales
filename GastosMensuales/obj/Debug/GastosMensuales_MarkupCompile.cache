@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\App.xaml
-2-672897401
+7854302479
 
-172003692705
+24454261955
 179-322105999
-Views\HomeView.xaml;Views\MainView.xaml;
+Views\DetalleGastoView.xaml;Views\DetalleIngresoView.xaml;Views\CrearGastoView.xaml;Views\HomeView.xaml;Views\CrearIngresoView.xaml;Views\InformeView.xaml;Views\MainView.xaml;
 
 False
 
