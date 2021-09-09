@@ -128,6 +128,16 @@ namespace GastosMensuales.ViewModels
                 Actualizar();
             }
         }
+        public void MostrarDetalleIngreso(object parameter)
+        {
+            if (parameter != null)
+            {
+                DataRowView drv = (DataRowView)parameter;
+                DetalleIngresoView form = new DetalleIngresoView(Convert.ToInt32(drv["Codigo"]));
+                form.ShowDialog();
+                Actualizar();
+            }
+        }
 
         public object SeleccionarGasto
         {
@@ -145,6 +155,7 @@ namespace GastosMensuales.ViewModels
             set
             {
                 _seleccionarIngreso = value;
+                MostrarDetalleIngreso(SeleccionarIngreso);
                 OnPropertyChanged("SeleccionarIngreso");
             }
         }

@@ -67,7 +67,7 @@
                   ItemsSource="{Binding Path=TablaIngresos}"
                   SelectedItem="{Binding Path=SeleccionarIngreso,Mode=TwoWay}"
                   IsReadOnly="True" 
-                  CanUserAddRows="False" UseLayoutRounding="False" FontSize="18" ScrollViewer.CanContentScroll="True" />
+                  CanUserAddRows="False" UseLayoutRounding="False" FontSize="18"/>
             </StackPanel>
         </Grid>
         <!--COLUMNA 2-->

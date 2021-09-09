@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GastosMensuales.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,13 @@ namespace GastosMensuales.Views
     /// </summary>
     public partial class DetalleIngresoView : Window
     {
-        public DetalleIngresoView()
+        public DetalleIngresoView(int valor)
         {
             InitializeComponent();
+            DetalleIngresoViewModel vm = new DetalleIngresoViewModel(valor);
+            DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(this.Close);
         }
     }
 }
