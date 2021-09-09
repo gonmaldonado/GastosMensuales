@@ -459,3 +459,15 @@ C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\
 C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\CrearGastoView.baml
 C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\CrearIngresoView.baml
 C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\Views\InformeView.baml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Common.dll
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Configuration.dll
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Frameworks.dll
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Packaging.dll
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Protocol.dll
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Versioning.dll
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Common.xml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Configuration.xml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Frameworks.xml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Packaging.xml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Protocol.xml
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\bin\Debug\NuGet.Versioning.xml

@@ -180,7 +180,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
         public void ModificarGasto(Gasto gasto)
         {
 
-            string sql = @"UPDATE Presupuestos
+            string sql = @"UPDATE Gastos
                             SET Nombre = @Nombre, 
                                 Descripcion = @Descripcion, 
                                 Monto = @Monto, 

@@ -1,6 +1,7 @@
 ﻿using GastosMensuales.Helpers;
 using GastosMensuales.Models;
 using GastosMensuales.Models.Domain;
+using NuGet.Protocol.Plugins;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,14 +10,19 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace GastosMensuales.ViewModels
 {
 
+
     public class DetalleGastoViewModel : INotifyPropertyChanged
     {
+        public Action CloseAction { get; set; }
         private ICommand _eliminar;
+        private ICommand _modificar;
         public static readonly DetalleGastoModel _model = new DetalleGastoModel();
         public event PropertyChangedEventHandler PropertyChanged;
         public static Gasto gasto;
@@ -32,6 +38,7 @@ namespace GastosMensuales.ViewModels
 
         public DetalleGastoViewModel(int Valor)
         {
+
             gasto = _model.TraerGasto(Valor);
             _codigo = gasto.Id;
             _nombre = gasto.Nombre;
@@ -130,7 +137,24 @@ namespace GastosMensuales.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public void Modificar()
+
+        public ICommand EliminarCommand
+        {
+            get { return _eliminar ?? (_eliminar = new RelayCommand(EliminarExecute)); }
+
+        }
+        public ICommand ModificarCommand
+        {
+            get { return _modificar ?? (_modificar = new RelayCommand(ModificarExecute)); }
+
+        }
+        public void EliminarExecute(object parameter)
+        {
+            _model.Eliminar(Codigo);
+            CloseAction();
+
+        }
+        public void ModificarExecute(object parameter)
         {
             gasto.Nombre = Nombre;
             gasto.Descripcion = Descripcion;
@@ -138,16 +162,8 @@ namespace GastosMensuales.ViewModels
             gasto.Periodicidad = Periodicidad;
             gasto.Cuotas = Cuotas;
             gasto.TipoMonto = _model.TipoMonto(TipoMonto);
-            _model.Modificar(gasto);          
-        }
-        public ICommand EliminarCommand
-        {
-            get { return _eliminar ?? (_eliminar = new RelayCommand(EliminarExecute)); }
-
-        }
-        public void EliminarExecute(object parameter)
-        {
-            _model.Eliminar(Codigo);
+            _model.Modificar(gasto);
+            CloseAction();
 
         }
 

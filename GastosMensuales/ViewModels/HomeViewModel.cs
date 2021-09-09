@@ -35,11 +35,11 @@ namespace GastosMensuales.ViewModels
 
         public void Actualizar()
         {
-            _tablaGastos = _model.TablaGastos(_presupuesto);
-            _tablaIngresos = _model.TablaIngresos(_presupuesto);
-            _gastos = _model.TotalMonto(_tablaGastos);
-            _ingresos = _model.TotalMonto(_tablaIngresos);
-            _total = _model.Total(_ingresos, _gastos);
+            TablaGastos = _model.TablaGastos(Presupuesto);
+            TablaIngresos = _model.TablaIngresos(Presupuesto);
+            Gastos = _model.TotalMonto(TablaGastos);
+            Ingresos = _model.TotalMonto(TablaIngresos);
+            Total = _model.Total(Ingresos, Gastos);
 
         }
         public decimal Gastos
@@ -57,6 +57,7 @@ namespace GastosMensuales.ViewModels
             set
             {
                 _presupuesto = value;
+                Actualizar();
                 OnPropertyChanged("Presupuesto");
             }
         }

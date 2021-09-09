@@ -1,6 +1,7 @@
 ﻿using GastosMensuales.Infrastructure.DataAccess;
 using GastosMensuales.Interfaces;
 using GastosMensuales.Models.Domain;
+using GastosMensuales.Views;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -37,6 +38,7 @@ namespace GastosMensuales.Models
         public void Eliminar(int code)
         {
             _data.EliminarGasto(code);
+          
         }
     }
 }

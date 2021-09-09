@@ -23,7 +23,10 @@ namespace GastosMensuales.Views
         public DetalleGastoView(int valor)
         {
             InitializeComponent();
-            DataContext = new DetalleGastoViewModel(valor);
+            DetalleGastoViewModel vm = new DetalleGastoViewModel(valor);
+            DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(this.Close);
         }
 
     }
