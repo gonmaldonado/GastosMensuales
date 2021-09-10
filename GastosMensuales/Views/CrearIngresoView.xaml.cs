@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GastosMensuales.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,15 @@ namespace GastosMensuales.Views
     /// <summary>
     /// Lógica de interacción para IngresoView.xaml
     /// </summary>
-    public partial class IngresoView : Window
+    public partial class CrearIngresoView : Window
     {
-        public IngresoView()
+        public CrearIngresoView()
         {
             InitializeComponent();
+           CrearIngresoViewModel vm = new CrearIngresoViewModel();
+            DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(this.Close);
         }
     }
 }

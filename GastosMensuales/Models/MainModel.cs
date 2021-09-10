@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GastosMensuales.Models
 {
-    class MainModel
+    public class MainModel
     {
     }
 }

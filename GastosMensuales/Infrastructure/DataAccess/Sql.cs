@@ -17,7 +17,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
 
         public void CrearGasto(Gasto gasto)
         {
-            string sql = @" INSERT INTO Ingresos (Nombre,Descripcion,Monto,Periodicidad,Cuotas,TipoMonto) VALUES (@Nombre,@Descripcion,@Monto,@Periodicidad,@Cuotas,@TipoMonto)  
+            string sql = @" INSERT INTO Ingresos (Nombre,Descripcion,Monto,Periodicidad) VALUES (@Nombre,@Descripcion,@Monto,@Periodicidad)  
                             DECLARE @Id_Ingreso AS INT 
                             SET @Id_Gasto =(SELECT DISTINCT TOP (1) Id FROM Gastos WHERE Nombre = @Nombre ORDER BY Id DESC) 
                             INSERT INTO R_PresupuestoGasto (Id_Presupuesto,Id_Gasto) VALUES (@IdPresupuesto,@Id_Gasto) ";
@@ -28,8 +28,6 @@ namespace GastosMensuales.Infrastructure.DataAccess
             objComAgregar.Parameters.AddWithValue("@Descripcion", gasto.Descripcion);
             objComAgregar.Parameters.AddWithValue("@Monto", Convert.ToDecimal(gasto.Monto));
             objComAgregar.Parameters.AddWithValue("@Periodicidad", Convert.ToInt32(gasto.Periodicidad));
-            objComAgregar.Parameters.AddWithValue("@Cuotas", Convert.ToInt32(gasto.Cuotas));
-            objComAgregar.Parameters.AddWithValue("@TipoMonto", Convert.ToInt32(gasto.TipoMonto));
             objComAgregar.Parameters.AddWithValue("@IdPresupuesto", Convert.ToInt32(gasto.IdPresupuesto));
             objComAgregar.CommandType = CommandType.Text;
             try
@@ -53,7 +51,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
 
         public void CrearIngreso(Ingreso ingreso)
         {
-            string sql = @" INSERT INTO Ingresos (Nombre,Descripcion,Monto,Periodicidad,TipoMonto) VALUES (@Nombre,@Descripcion,@Monto,@Periodicidad,@TipoMonto)  
+            string sql = @" INSERT INTO Ingresos (Nombre,Descripcion,Monto,Periodicidad) VALUES (@Nombre,@Descripcion,@Monto,@Periodicidad)  
                             DECLARE @Id_Ingreso AS INT 
                             SET @Id_Ingreso =(SELECT DISTINCT TOP (1) Id FROM Ingresos  WHERE Nombre = @Nombre ORDER BY Id DESC) 
                             INSERT INTO R_PresupuestoIngreso (Id_Presupuesto,Id_Ingreso) VALUES (@IdPresupuesto,@Id_Ingreso) ";
@@ -64,7 +62,6 @@ namespace GastosMensuales.Infrastructure.DataAccess
             objComAgregar.Parameters.AddWithValue("@Descripcion", ingreso.Descripcion);
             objComAgregar.Parameters.AddWithValue("@Monto", Convert.ToDecimal(ingreso.Monto));
             objComAgregar.Parameters.AddWithValue("@Periodicidad", Convert.ToInt32(ingreso.Periodicidad));
-            objComAgregar.Parameters.AddWithValue("@TipoMonto", Convert.ToInt32(ingreso.TipoMonto));
             objComAgregar.Parameters.AddWithValue("@IdPresupuesto", Convert.ToInt32(ingreso.IdPresupuesto));
             objComAgregar.CommandType = CommandType.Text;
             try
@@ -185,7 +182,6 @@ namespace GastosMensuales.Infrastructure.DataAccess
                                 Descripcion = @Descripcion, 
                                 Monto = @Monto, 
                                 Periodicidad = @Periodicidad, 
-                                Cuotas = @Cuotas, 
                                 TipoMonto = @TipoMonto
                              WHERE id = @Id;";
 
@@ -196,8 +192,6 @@ namespace GastosMensuales.Infrastructure.DataAccess
             objComModificar.Parameters.AddWithValue("@Descripcion", gasto.Descripcion);
             objComModificar.Parameters.AddWithValue("@Monto", Convert.ToDecimal(gasto.Monto));
             objComModificar.Parameters.AddWithValue("@Periodicidad", Convert.ToInt32(gasto.Periodicidad));
-            objComModificar.Parameters.AddWithValue("@Cuotas", Convert.ToInt32(gasto.Cuotas));
-            objComModificar.Parameters.AddWithValue("@TipoMonto", Convert.ToInt32(gasto.TipoMonto));
             objComModificar.Parameters.AddWithValue("@IdPresupuesto", Convert.ToInt32(gasto.IdPresupuesto));
             objComModificar.CommandType = CommandType.Text;
             try
@@ -225,8 +219,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
                             SET Nombre = @Nombre, 
                                 Descripcion = @Descripcion, 
                                 Monto = @Monto, 
-                                Periodicidad = @Periodicidad, 
-                                TipoMonto = @TipoMonto
+                                Periodicidad = @Periodicidad
                              WHERE id = @Id;";
 
             SqlConnection objConexion = new SqlConnection(strConexion);
@@ -236,7 +229,6 @@ namespace GastosMensuales.Infrastructure.DataAccess
             objComModificar.Parameters.AddWithValue("@Descripcion", ingreso.Descripcion);
             objComModificar.Parameters.AddWithValue("@Monto", Convert.ToDecimal(ingreso.Monto));
             objComModificar.Parameters.AddWithValue("@Periodicidad", Convert.ToInt32(ingreso.Periodicidad));
-            objComModificar.Parameters.AddWithValue("@TipoMonto", Convert.ToInt32(ingreso.TipoMonto));
             objComModificar.Parameters.AddWithValue("@IdPresupuesto", Convert.ToInt32(ingreso.IdPresupuesto));
             objComModificar.CommandType = CommandType.Text;
             try
@@ -359,6 +351,18 @@ namespace GastosMensuales.Infrastructure.DataAccess
 
             return presupuesto;
         }
+        public int TraerUltmoIdPresupuesto()
+        {
+            int presupuesto;
+            string sql = "SELECT TOP (1) Id FROM Presupuestos ORDER BY Id DESC ";
+            SqlConnection objConexion = new SqlConnection(strConexion);
+            SqlCommand objComTraer = new SqlCommand(sql, objConexion);
+            objComTraer.CommandType = CommandType.Text;
+            objConexion.Open();
+            presupuesto = Convert.ToInt32(objComTraer.ExecuteScalar().ToString());
+            objConexion.Close();
+            return presupuesto;
+        }
         public Ingreso TraerIngreso(int id)
         {
             Ingreso ingreso = new Ingreso();
@@ -378,7 +382,6 @@ namespace GastosMensuales.Infrastructure.DataAccess
                     ingreso.Descripcion = drIngresos["Descripcion"].ToString().Trim();
                     ingreso.Monto = Convert.ToDecimal(drIngresos["Monto"]);
                     ingreso.Periodicidad = Convert.ToInt32(drIngresos["Periodicidad"]);
-                    ingreso.TipoMonto = Convert.ToInt32(drIngresos["TipoMonto"]);
                 }
                 objConexion.Close();
                 return ingreso;
@@ -412,8 +415,6 @@ namespace GastosMensuales.Infrastructure.DataAccess
                     gasto.Descripcion = drGastos["Descripcion"].ToString().Trim();
                     gasto.Monto = Convert.ToDecimal(drGastos["Monto"]);
                     gasto.Periodicidad = Convert.ToInt32(drGastos["Periodicidad"]);
-                    gasto.Cuotas = Convert.ToInt32(drGastos["Cuotas"]);
-                    gasto.TipoMonto = Convert.ToInt32(drGastos["TipoMonto"]);
                 }
                 objConexion.Close();
                 return gasto;

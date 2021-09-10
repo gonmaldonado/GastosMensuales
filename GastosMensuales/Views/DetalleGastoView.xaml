@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:GastosMensuales.Views"
         mc:Ignorable="d"
         Icon ="/Icon/GastosMensuales.png"
-        Title="Detalle de gasto" Height="650" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Detalle de gasto" Height="550" Width="400" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -55,26 +55,7 @@
             <TextBox x:Name="txtPeriodicidad"
                      MaxLength="3"
                      FontSize="15"
-                     Text="{Binding Path=Periodicidad,Mode=TwoWay}"/>
-            <Label Content="Cantidad de cuotas"
-                   FontSize="20"/>
-            <TextBox x:Name="txtCuotas"
-                     MaxLength="3"
-                     FontSize="15"
-                     Text="{Binding Path=Cuotas,Mode=TwoWay}"/>
-            <Label Content="Tipo de monto"
-                   FontSize="20"/>
-            <ComboBox
-                Name="cmbTiposDeMonto"
-                  FontSize="15"
-                  IsReadOnly="True"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Left"
-                  ItemsSource="{Binding Path = TiposDeMonto, Mode=OneWay}"
-                  Text="{Binding Path = TipoMonto, Mode=TwoWay}"
-                  DisplayMemberPath="Tipo"
-                  IsEditable="True">
-            </ComboBox>
+                   Text="{Binding Path=Periodicidad,Mode=TwoWay}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>

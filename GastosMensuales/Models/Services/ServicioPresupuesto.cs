@@ -64,6 +64,10 @@ namespace GastosMensuales.Models.Services
         {
             return _data.TraerUltmoPresupuesto();
         }
+        public static int IdPresupuestoActual()
+        {
+            return _data.TraerUltmoIdPresupuesto();
+        }
         public static void Crear()
         {
             Presupuesto presupuesto = new Presupuesto();

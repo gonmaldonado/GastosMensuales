@@ -13,8 +13,6 @@ namespace GastosMensuales.Models.Domain
         public string Descripcion { get; set; }
         public decimal Monto { get; set; }
         public int Periodicidad { get; set; }
-        public int Cuotas { get; set; }
-        public int TipoMonto { get; set; }
         public int IdPresupuesto { get; set; }
 
     }

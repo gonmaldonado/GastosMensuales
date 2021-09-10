@@ -29,6 +29,7 @@ namespace GastosMensuales.Interfaces
         string TraerUltmoPresupuesto();
         Ingreso TraerIngreso(int id);
         Gasto TraerGasto(int id);
+        int TraerUltmoIdPresupuesto();
 
     }
 }

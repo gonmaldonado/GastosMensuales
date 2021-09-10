@@ -327,6 +327,7 @@
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Infrastructure\DataAccess\Sql.cs" />
     <Compile Include="Interfaces\IDataAccess.cs" />
+    <Compile Include="Models\CrearIngresoModel.cs" />
     <Compile Include="Models\DetalleGastoModel.cs" />
     <Compile Include="Models\DetalleIngresoModel.cs" />
     <Compile Include="Models\Domain\Gasto.cs" />
@@ -335,6 +336,7 @@
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\Services\ServicioPresupuesto.cs" />
+    <Compile Include="ViewModels\CrearIngresoViewModel.cs" />
     <Compile Include="ViewModels\DetalleGastoViewModel.cs" />
     <Compile Include="ViewModels\DetalleIngresoViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />

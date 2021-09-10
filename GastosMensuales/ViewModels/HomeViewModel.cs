@@ -20,7 +20,8 @@ namespace GastosMensuales.ViewModels
 {
     public class HomeViewModel : INotifyPropertyChanged
     {
-        private ICommand _sendSelectionGasto;
+        private ICommand _crearIngreso;
+        private ICommand _crearGasto;
         public event PropertyChangedEventHandler PropertyChanged;
         public static readonly HomeModel _model = new HomeModel();
         public static string _presupuesto = _model.PresupestoActual();
@@ -108,15 +109,16 @@ namespace GastosMensuales.ViewModels
             }
         }
 
-        public ICommand SendSelectionGastoCommand
+        public ICommand CrearIngresoCommand
         {
-            get { return _sendSelectionGasto ?? (_sendSelectionGasto = new RelayCommand(SendSelectionGastoExecute)); }
+            get { return _crearIngreso ?? (_crearIngreso = new RelayCommand(CrearIngresoExecute)); }
 
         }
-        public void SendSelectionGastoExecute(object parameter)
+        public void CrearIngresoExecute(object parameter)
         {
-
-
+            CrearIngresoView form = new CrearIngresoView();
+            form.ShowDialog();
+            Actualizar();
         }
         public void MostrarDetalleGasto(object parameter)
         {

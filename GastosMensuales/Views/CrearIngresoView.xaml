@@ -1,12 +1,98 @@
-﻿<Window x:Class="GastosMensuales.Views.IngresoView"
+﻿<Window x:Class="GastosMensuales.Views.CrearIngresoView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GastosMensuales.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:ViewModel="clr-namespace:GastosMensuales.ViewModels"
+        xmlns:local="clr-namespace:GastosMensuales.Views" d:DataContext="{d:DesignInstance Type=ViewModel:DetalleIngresoViewModel}"
         mc:Ignorable="d"
-        Title="IngresoView" Height="450" Width="800">
-    <Grid>
-        
+        Icon ="/Icon/GastosMensuales.png"
+        Title="Crear ingreso" Height="450" Width="400" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <Label Content="Nombre"
+                   FontSize="20"/>
+            <TextBox x:Name="txtNombre"
+                     MaxLength="30"
+                     FontSize="15"
+                     Text="{Binding Path =Nombre}"/>
+            <Label Content="Descripcion"
+                   FontSize="20"/>
+            <TextBox x:Name="txtDescripcion" AcceptsReturn="True" TextWrapping="Wrap" SpellCheck.IsEnabled="True"
+                     MaxLength="150"
+                     FontSize="15"
+                     Text="{Binding Path =Descripcion}"/>
+            <Label Content="Monto"
+                   FontSize="20"/>
+            <TextBox x:Name="txtMonto"
+                     MaxLength="14"
+                     FontSize="15"
+                     Text="{Binding Path =Monto}"/>
+            <Label Content="Periodicidad"
+                   FontSize="20"/>
+            <TextBox x:Name="txtPeriodicidad"
+                     MaxLength="3"
+                     FontSize="15"
+                     Text="{Binding Path =Periodicidad}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" 
+                  Orientation="Horizontal"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Grid}">
+                            <Setter Property="Margin" Value="5,0,5,0"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Grid>
+                        <Button
+                      Padding="0"
+                      Height="30"
+                      Width="80" 
+                      Command="{Binding Path=CrearCommand}"
+                      Background="PaleTurquoise"
+                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                      materialDesign:ButtonAssist.CornerRadius="25"
+                      IsEnabled="True">
+                            <TextBlock
+                       Text="Crear"/>
+                        </Button>
+                    </Grid>
+                    <Grid>
+                        <Button
+                        Padding="0"
+                        Height="30"
+                        Width="80"    
+                        Background="PaleTurquoise"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="25"
+                        IsEnabled="True"
+                        IsCancel="True">
+                            <TextBlock
+                         Text="Cancelar" />
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

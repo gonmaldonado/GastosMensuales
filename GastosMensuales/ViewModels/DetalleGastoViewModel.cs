@@ -26,7 +26,6 @@ namespace GastosMensuales.ViewModels
         public static readonly DetalleGastoModel _model = new DetalleGastoModel();
         public event PropertyChangedEventHandler PropertyChanged;
         public static Gasto gasto;
-        protected static DataTable _tiposDeMonto = _model.TiposDeMontos();
         protected static int _codigo;
         protected static string _nombre;
         protected static string _descripcion;
@@ -45,9 +44,6 @@ namespace GastosMensuales.ViewModels
             _descripcion = gasto.Descripcion;
             _monto = gasto.Monto;
             _periodicidad = gasto.Periodicidad;
-            _cuotas = gasto.Cuotas;
-            _tipoMontoId = gasto.TipoMonto;
-            _tipoMonto = _model.TipoMonto(gasto.TipoMonto);
         }
         public int Codigo
         {
@@ -76,42 +72,7 @@ namespace GastosMensuales.ViewModels
                 OnPropertyChanged("Periodicidad");
             }
         }
-        public int Cuotas
-        {
-            get { return _cuotas; }
-            set
-            {
-                _cuotas = value;
-                OnPropertyChanged("Cuotas");
-            }
-        }
-        public int TipoMontoId
-        {
-            get { return _tipoMontoId; }
-            set
-            {
-                _tipoMontoId = value;
-                OnPropertyChanged("TipoMontoId");
-            }
-        }
-        public string TipoMonto
-        {
-            get { return _tipoMonto; }
-            set
-            {
-                _tipoMonto = value;
-                OnPropertyChanged("TipoMonto");
-            }
-        }
-        public DataTable TiposDeMonto
-        {
-            get { return _tiposDeMonto; }
-            set
-            {
-                _tiposDeMonto = value;
-                OnPropertyChanged("TiposDeMonto");
-            }
-        }
+
         public string Nombre
         {
             get { return _nombre; }
@@ -160,8 +121,6 @@ namespace GastosMensuales.ViewModels
             gasto.Descripcion = Descripcion;
             gasto.Monto = Monto;
             gasto.Periodicidad = Periodicidad;
-            gasto.Cuotas = Cuotas;
-            gasto.TipoMonto = _model.TipoMonto(TipoMonto);
             _model.Modificar(gasto);
             CloseAction();
 

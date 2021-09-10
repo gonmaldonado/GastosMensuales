@@ -1,6 +1,7 @@
 ﻿using GastosMensuales.Helpers;
 using GastosMensuales.Models;
 using GastosMensuales.Models.Domain;
+using GastosMensuales.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,43 +12,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace GastosMensuales.ViewModels
+namespace GastosMensuales.ViewModels 
 {
-    public class DetalleIngresoViewModel : INotifyPropertyChanged
+    public class CrearIngresoViewModel : INotifyPropertyChanged
     {
         public Action CloseAction { get; set; }
-        private ICommand _eliminar;
-        private ICommand _modificar;
-        public static readonly DetalleIngresoModel _model = new DetalleIngresoModel();
+        private ICommand _crear;
+        public static readonly CrearIngresoModel _model = new CrearIngresoModel();
         public event PropertyChangedEventHandler PropertyChanged;
-        public static Ingreso ingreso;
-        protected static int _codigo;
+        public static Ingreso ingreso = new Ingreso();
         protected static string _nombre;
         protected static string _descripcion;
         protected static decimal _monto;
         protected static int _periodicidad;
         protected static int _tipoMontoId;
-        protected static string _tipoMonto;
+        protected static string _tipoMonto = "Seleccione un tipo";
 
-        public DetalleIngresoViewModel(int Valor)
+        public CrearIngresoViewModel()
         {
-            ingreso = _model.TraerIngreso(Valor);
-            _codigo = ingreso.Id;
-            _nombre = ingreso.Nombre;
-            _descripcion = ingreso.Descripcion;
-            _monto = ingreso.Monto;
-            _periodicidad = ingreso.Periodicidad;
 
         }
-        public int Codigo
-        {
-            get { return _codigo; }
-            set
-            {
-                _codigo = value;
-                OnPropertyChanged("Codigo");
-            }
-        }
+
         public decimal Monto
         {
             get { return _monto; }
@@ -67,6 +52,24 @@ namespace GastosMensuales.ViewModels
             }
         }
 
+        public int TipoMontoId
+        {
+            get { return _tipoMontoId; }
+            set
+            {
+                _tipoMontoId = value;
+                OnPropertyChanged("TipoMontoId");
+            }
+        }
+        public string TipoMonto
+        {
+            get { return _tipoMonto; }
+            set
+            {
+                _tipoMonto = value;
+                OnPropertyChanged("TipoMonto");
+            }
+        }
         public string Nombre
         {
             get { return _nombre; }
@@ -93,31 +96,23 @@ namespace GastosMensuales.ViewModels
             }
         }
 
-        public ICommand EliminarCommand
+        public ICommand CrearCommand
         {
-            get { return _eliminar ?? (_eliminar = new RelayCommand(EliminarExecute)); }
+            get { return _crear ?? (_crear = new RelayCommand(CrearExecute)); }
 
         }
-        public ICommand ModificarCommand
-        {
-            get { return _modificar ?? (_modificar = new RelayCommand(ModificarExecute)); }
 
-        }
-        public void EliminarExecute(object parameter)
-        {
-            _model.Eliminar(Codigo);
-            CloseAction();
-
-        }
-        public void ModificarExecute(object parameter)
+        public void CrearExecute(object parameter)
         {
             ingreso.Nombre = Nombre;
             ingreso.Descripcion = Descripcion;
             ingreso.Monto = Monto;
             ingreso.Periodicidad = Periodicidad;
-            _model.Modificar(ingreso);
+            ingreso.IdPresupuesto = ServicioPresupuesto.IdPresupuestoActual();
+            _model.Crear(ingreso);
             CloseAction();
 
         }
+
     }
 }

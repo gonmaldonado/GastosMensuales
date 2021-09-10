@@ -104,9 +104,10 @@
                        Height="40"
                        Width="150"
                        Background="PaleTurquoise"
+                    Command="{Binding Path = CrearIngresoCommand}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="25"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                    IsEnabled="true">
                         <TextBlock
                       Text="Crear Ingreso"/>
                     </Button>

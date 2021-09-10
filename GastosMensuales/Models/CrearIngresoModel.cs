@@ -2,7 +2,6 @@
 using GastosMensuales.Interfaces;
 using GastosMensuales.Models.Domain;
 using GastosMensuales.Models.Services;
-using GastosMensuales.Views;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,21 +11,14 @@ using System.Threading.Tasks;
 
 namespace GastosMensuales.Models
 {
-    public class DetalleGastoModel
+   
+    public class CrearIngresoModel 
     {
         public IDataAccess _data = new Sql();
-        public Gasto TraerGasto(int codigo)
+        public void Crear(Ingreso ingreso)
         {
-            return _data.TraerGasto(codigo);
+            _data.CrearIngreso(ingreso);
         }
-        public void Modificar(Gasto gasto)
-        {
-            _data.ModificarGasto(gasto);
-        }
-        public void Eliminar(int code)
-        {
-            _data.EliminarGasto(code);
-          
-        }
+
     }
 }

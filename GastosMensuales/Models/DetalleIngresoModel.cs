@@ -1,6 +1,7 @@
 ﻿using GastosMensuales.Infrastructure.DataAccess;
 using GastosMensuales.Interfaces;
 using GastosMensuales.Models.Domain;
+using GastosMensuales.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,24 +13,11 @@ namespace GastosMensuales.Models
 {
     public class DetalleIngresoModel
     {
-        public IDataAccess _data = new Sql();
-        public DataTable TiposDeMontos()
-        {
-            return _data.TraerTipoMonto();
-        }
+        public IDataAccess _data= new Sql();
         public Ingreso TraerIngreso(int codigo)
         {
             return _data.TraerIngreso(codigo);
         }
-        public string TipoMonto(int id)
-        {
-            return _data.TraerTipoMonto(id);
-        }
-        public int TipoMonto(string tipo)
-        {
-            return _data.TraerTipoMonto(tipo);
-        }
-
         public void Modificar(Ingreso ingreso)
         {
             _data.ModificarIngreso(ingreso);
