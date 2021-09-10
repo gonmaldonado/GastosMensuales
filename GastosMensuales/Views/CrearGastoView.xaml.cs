@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GastosMensuales.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,15 @@ namespace GastosMensuales.Views
     /// <summary>
     /// Lógica de interacción para GastoView.xaml
     /// </summary>
-    public partial class GastoView : Window
+    public partial class CrearGastoView : Window
     {
-        public GastoView()
+        public CrearGastoView()
         {
             InitializeComponent();
+            CrearGastoViewModel vm = new CrearGastoViewModel();
+            DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(this.Close);
         }
     }
 }

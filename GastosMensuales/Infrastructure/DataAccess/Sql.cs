@@ -17,8 +17,8 @@ namespace GastosMensuales.Infrastructure.DataAccess
 
         public void CrearGasto(Gasto gasto)
         {
-            string sql = @" INSERT INTO Ingresos (Nombre,Descripcion,Monto,Periodicidad) VALUES (@Nombre,@Descripcion,@Monto,@Periodicidad)  
-                            DECLARE @Id_Ingreso AS INT 
+            string sql = @" INSERT INTO Gastos (Nombre,Descripcion,Monto,Periodicidad) VALUES (@Nombre,@Descripcion,@Monto,@Periodicidad)  
+                            DECLARE @Id_gasto AS INT 
                             SET @Id_Gasto =(SELECT DISTINCT TOP (1) Id FROM Gastos WHERE Nombre = @Nombre ORDER BY Id DESC) 
                             INSERT INTO R_PresupuestoGasto (Id_Presupuesto,Id_Gasto) VALUES (@IdPresupuesto,@Id_Gasto) ";
 

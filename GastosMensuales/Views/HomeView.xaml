@@ -91,6 +91,7 @@
                       Height="40"
                       Width="150"    
                       Background="PaleTurquoise"
+                        Command="{Binding Path = CrearGastoCommand}"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">

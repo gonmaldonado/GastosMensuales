@@ -120,6 +120,17 @@ namespace GastosMensuales.ViewModels
             form.ShowDialog();
             Actualizar();
         }
+        public ICommand CrearGastoCommand
+        {
+            get { return _crearGasto ?? (_crearGasto = new RelayCommand(CrearGastoExecute)); }
+
+        }
+        public void CrearGastoExecute(object parameter)
+        {
+            CrearGastoView form = new CrearGastoView();
+            form.ShowDialog();
+            Actualizar();
+        }
         public void MostrarDetalleGasto(object parameter)
         {
             if (parameter != null)
