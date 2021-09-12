@@ -28,7 +28,7 @@ namespace GastosMensuales.ViewModels
         public static object _seleccionarGasto;
         public static object _seleccionarIngreso;
         protected static DataTable _tablaGastos = _model.TablaGastos(_presupuesto);
-        protected static DataTable _tablaIngresos= _model.TablaIngresos(_presupuesto);
+        protected static DataTable _tablaIngresos = _model.TablaIngresos(_presupuesto);
         protected static decimal _ingresos = _model.TotalMonto(_tablaIngresos);
         protected static decimal _gastos = _model.TotalMonto(_tablaGastos);
         protected decimal _total = _model.Total(_ingresos, _gastos);

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\
+E:\GastosMensuales\GastosMensuales\GastosMensuales\obj\Debug\
 GastosMensuales
 none
 false
 DEBUG;TRACE
-C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\App.xaml
+E:\GastosMensuales\GastosMensuales\GastosMensuales\App.xaml
 7854302479
 
-311266848693
-189-1834739991
+321254499344
+189858492743
 Views\DetalleGastoView.xaml;Views\DetalleIngresoView.xaml;Views\CrearGastoView.xaml;Views\HomeView.xaml;Views\CrearIngresoView.xaml;Views\InformeView.xaml;Views\MainView.xaml;
 
-False
+True
 

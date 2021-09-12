@@ -20,16 +20,15 @@ namespace GastosMensuales.ViewModels
         public static readonly CrearGastoModel _model = new CrearGastoModel();
         public event PropertyChangedEventHandler PropertyChanged;
         public static Gasto gasto = new Gasto();
+        protected static string _mensaje;
         protected static string _nombre;
         protected static string _descripcion;
         protected static decimal _monto;
         protected static int _periodicidad;
-        protected static int _tipoMontoId;
-        protected static string _tipoMonto = "Seleccione un tipo";
 
         public CrearGastoViewModel()
         {
-
+            Limpiar();
         }
 
         public decimal Monto
@@ -51,22 +50,15 @@ namespace GastosMensuales.ViewModels
             }
         }
 
-        public int TipoMontoId
+
+
+        public string Mensaje
         {
-            get { return _tipoMontoId; }
+            get { return _mensaje; }
             set
             {
-                _tipoMontoId = value;
-                OnPropertyChanged("TipoMontoId");
-            }
-        }
-        public string TipoMonto
-        {
-            get { return _tipoMonto; }
-            set
-            {
-                _tipoMonto = value;
-                OnPropertyChanged("TipoMonto");
+                _mensaje = value;
+                OnPropertyChanged("Mensaje");
             }
         }
         public string Nombre
@@ -103,14 +95,35 @@ namespace GastosMensuales.ViewModels
 
         public void CrearExecute(object parameter)
         {
-            gasto.Nombre = Nombre;
-            gasto.Descripcion = Descripcion;
-            gasto.Monto = Monto;
-            gasto.Periodicidad = Periodicidad;
-            gasto.IdPresupuesto = ServicioPresupuesto.IdPresupuestoActual();
-            _model.Crear(gasto);
-            CloseAction();
+            try
+            {
+                LimpiarMensaje();
+                gasto.Nombre = Nombre;
+                gasto.Descripcion = Descripcion;
+                gasto.Monto = Monto;
+                gasto.Periodicidad = Periodicidad;
+                gasto.IdPresupuesto = ServicioPresupuesto.IdPresupuestoActual();
+                _model.Crear(gasto);
+                CloseAction();
+            }
+            catch (ApplicationException ex)
+            {
+                Mensaje = ex.Message;
+            }
 
+        }
+        public void Limpiar()
+        {
+            Mensaje = null;
+            Nombre = null;
+            Descripcion = null;
+            Monto = 0;
+            Periodicidad = 0;
+
+        }
+        public void LimpiarMensaje()
+        {
+            Mensaje = null;
         }
     }
 }

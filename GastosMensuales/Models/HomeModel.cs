@@ -24,8 +24,9 @@ namespace GastosMensuales.Models
 
         public string PresupestoActual()
         {
+            string presupuesto = ServicioPresupuesto.PresupuestoActual();
             ServicioPresupuesto.NuevoMes();
-            return ServicioPresupuesto.PresupuestoActual();
+            return presupuesto;
         }
         public DataTable TablaGastos(string presupuesto)
         {

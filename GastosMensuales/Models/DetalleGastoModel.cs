@@ -21,6 +21,7 @@ namespace GastosMensuales.Models
         }
         public void Modificar(Gasto gasto)
         {
+            ServicioValidacion.Gasto(gasto);
             _data.ModificarGasto(gasto);
         }
         public void Eliminar(int code)

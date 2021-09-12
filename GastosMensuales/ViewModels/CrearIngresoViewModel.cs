@@ -21,6 +21,7 @@ namespace GastosMensuales.ViewModels
         public static readonly CrearIngresoModel _model = new CrearIngresoModel();
         public event PropertyChangedEventHandler PropertyChanged;
         public static Ingreso ingreso = new Ingreso();
+        protected static string _mensaje;
         protected static string _nombre;
         protected static string _descripcion;
         protected static decimal _monto;
@@ -30,7 +31,16 @@ namespace GastosMensuales.ViewModels
 
         public CrearIngresoViewModel()
         {
-
+            Limpiar();
+        }
+        public string Mensaje
+        {
+            get { return _mensaje; }
+            set
+            {
+                _mensaje = value;
+                OnPropertyChanged("Mensaje");
+            }
         }
 
         public decimal Monto
@@ -104,14 +114,35 @@ namespace GastosMensuales.ViewModels
 
         public void CrearExecute(object parameter)
         {
-            ingreso.Nombre = Nombre;
-            ingreso.Descripcion = Descripcion;
-            ingreso.Monto = Monto;
-            ingreso.Periodicidad = Periodicidad;
-            ingreso.IdPresupuesto = ServicioPresupuesto.IdPresupuestoActual();
-            _model.Crear(ingreso);
-            CloseAction();
+            try
+            {
+                LimpiarMensaje();
+                ingreso.Nombre = Nombre;
+                ingreso.Descripcion = Descripcion;
+                ingreso.Monto = Monto;
+                ingreso.Periodicidad = Periodicidad;
+                ingreso.IdPresupuesto = ServicioPresupuesto.IdPresupuestoActual();
+                _model.Crear(ingreso);
+                CloseAction();
+            }
+            catch (ApplicationException ex)
+            {
+                Mensaje = ex.Message;
+            }
 
+        }
+        public void Limpiar()
+        {
+            Mensaje = null;
+            Nombre = null;
+            Descripcion = null;
+            Monto = 0;
+            Periodicidad = 0;
+
+        }
+        public void LimpiarMensaje()
+        {
+            Mensaje = null;
         }
 
     }

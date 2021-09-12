@@ -346,7 +346,14 @@ namespace GastosMensuales.Infrastructure.DataAccess
             SqlCommand objComTraer = new SqlCommand(sql, objConexion);
             objComTraer.CommandType = CommandType.Text;
             objConexion.Open();
-            presupuesto = objComTraer.ExecuteScalar().ToString();
+            if (objComTraer.ExecuteScalar() != null)
+            {
+                presupuesto = objComTraer.ExecuteScalar().ToString();
+            }
+            else
+            {
+                presupuesto = null;
+            }
             objConexion.Close();
 
             return presupuesto;

@@ -337,6 +337,7 @@
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\Services\ServicioPresupuesto.cs" />
+    <Compile Include="Models\Services\ServicioValidacion.cs" />
     <Compile Include="ViewModels\CrearGastoViewModel.cs" />
     <Compile Include="ViewModels\CrearIngresoViewModel.cs" />
     <Compile Include="ViewModels\DetalleGastoViewModel.cs" />

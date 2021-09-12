@@ -62,7 +62,14 @@ namespace GastosMensuales.Models.Services
         }
         public static string PresupuestoActual()
         {
-            return _data.TraerUltmoPresupuesto();
+            string ultimo = _data.TraerUltmoPresupuesto();
+            if ( ultimo == null)
+            {
+                Crear();
+                ultimo = _data.TraerUltmoPresupuesto();
+            }
+            return ultimo;
+               
         }
         public static int IdPresupuestoActual()
         {
@@ -90,6 +97,7 @@ namespace GastosMensuales.Models.Services
         }
         public static void NuevoMes()
         {
+
             int mes = MesActual();
             if(_data.TraerUltmoMesPresupuesto() == mes)
             {

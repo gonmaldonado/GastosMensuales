@@ -21,6 +21,7 @@ namespace GastosMensuales.ViewModels
         public static readonly DetalleIngresoModel _model = new DetalleIngresoModel();
         public event PropertyChangedEventHandler PropertyChanged;
         public static Ingreso ingreso;
+        protected static string _mensaje;
         protected static int _codigo;
         protected static string _nombre;
         protected static string _descripcion;
@@ -31,6 +32,7 @@ namespace GastosMensuales.ViewModels
 
         public DetalleIngresoViewModel(int Valor)
         {
+            LimpiarMensaje();
             ingreso = _model.TraerIngreso(Valor);
             _codigo = ingreso.Id;
             _nombre = ingreso.Nombre;
@@ -38,6 +40,15 @@ namespace GastosMensuales.ViewModels
             _monto = ingreso.Monto;
             _periodicidad = ingreso.Periodicidad;
 
+        }
+        public string Mensaje
+        {
+            get { return _mensaje; }
+            set
+            {
+                _mensaje = value;
+                OnPropertyChanged("Mensaje");
+            }
         }
         public int Codigo
         {
@@ -111,13 +122,27 @@ namespace GastosMensuales.ViewModels
         }
         public void ModificarExecute(object parameter)
         {
-            ingreso.Nombre = Nombre;
-            ingreso.Descripcion = Descripcion;
-            ingreso.Monto = Monto;
-            ingreso.Periodicidad = Periodicidad;
-            _model.Modificar(ingreso);
-            CloseAction();
+            try
+            {
+                LimpiarMensaje();
+                ingreso.Nombre = Nombre;
+                ingreso.Descripcion = Descripcion;
+                ingreso.Monto = Monto;
+                ingreso.Periodicidad = Periodicidad;
+                _model.Modificar(ingreso);
+                CloseAction();
+            }
+            catch (ApplicationException ex)
+            {
+                Mensaje = ex.Message;
+            }
 
         }
+
+        public void LimpiarMensaje()
+        {
+            Mensaje = null;
+        }
+
     }
 }

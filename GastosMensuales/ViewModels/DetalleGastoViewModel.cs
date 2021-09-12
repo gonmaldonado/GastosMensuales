@@ -26,6 +26,7 @@ namespace GastosMensuales.ViewModels
         public static readonly DetalleGastoModel _model = new DetalleGastoModel();
         public event PropertyChangedEventHandler PropertyChanged;
         public static Gasto gasto;
+        protected static string _mensaje;
         protected static int _codigo;
         protected static string _nombre;
         protected static string _descripcion;
@@ -37,13 +38,22 @@ namespace GastosMensuales.ViewModels
 
         public DetalleGastoViewModel(int Valor)
         {
-
+            LimpiarMensaje();
             gasto = _model.TraerGasto(Valor);
             _codigo = gasto.Id;
             _nombre = gasto.Nombre;
             _descripcion = gasto.Descripcion;
             _monto = gasto.Monto;
             _periodicidad = gasto.Periodicidad;
+        }
+        public string Mensaje
+        {
+            get { return _mensaje; }
+            set
+            {
+                _mensaje = value;
+                OnPropertyChanged("Mensaje");
+            }
         }
         public int Codigo
         {
@@ -117,15 +127,26 @@ namespace GastosMensuales.ViewModels
         }
         public void ModificarExecute(object parameter)
         {
-            gasto.Nombre = Nombre;
-            gasto.Descripcion = Descripcion;
-            gasto.Monto = Monto;
-            gasto.Periodicidad = Periodicidad;
-            _model.Modificar(gasto);
-            CloseAction();
-
+            try
+            {
+                LimpiarMensaje();
+                gasto.Nombre = Nombre;
+                gasto.Descripcion = Descripcion;
+                gasto.Monto = Monto;
+                gasto.Periodicidad = Periodicidad;
+                _model.Modificar(gasto);
+                CloseAction();
+            }
+            catch (ApplicationException ex)
+            {
+                Mensaje = ex.Message;
+            }
         }
 
+        public void LimpiarMensaje()
+        {
+            Mensaje = null;
+        }
 
     }
 }

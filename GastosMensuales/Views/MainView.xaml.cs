@@ -1,4 +1,5 @@
 ﻿using System;
+using GastosMensuales.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace GastosMensuales.Views
         public MainView()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

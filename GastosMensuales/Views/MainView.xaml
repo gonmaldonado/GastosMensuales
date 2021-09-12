@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:GastosMensuales" 
         mc:Ignorable="d"
         Icon ="/Icon/GastosMensuales.png"
-        Title="GastosMensuales" Height="450" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="GastosMensuales" Height="850" Width="1100" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -29,7 +29,7 @@
                     materialDesign:ShadowAssist.ShadowDepth="Depth2"
                     Mode="PrimaryMid"
                     DockPanel.Dock="Top"
-                    Background="PaleTurquoise" Margin="0,0,-0.4,0" VerticalAlignment="Top" Height="57">
+                    Background="PaleTurquoise" VerticalAlignment="Top" Height="50">
             <DockPanel>
                 <StackPanel Orientation="Horizontal">
                     <Image 
@@ -61,8 +61,12 @@
                             Text="Gastos Mensuales"/>
             </DockPanel>
         </materialDesign:ColorZone>
-        <Grid Grid.Row="1">
-            <views:HomeView/>
-        </Grid>
+        <ScrollViewer Grid.Row="1" Margin="10">
+            <ContentControl >
+                <Grid>
+                    <views:HomeView/>
+                </Grid>
+            </ContentControl>
+        </ScrollViewer>
     </Grid>
 </Window>

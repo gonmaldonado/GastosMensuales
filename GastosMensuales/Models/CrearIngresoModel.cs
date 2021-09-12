@@ -17,6 +17,7 @@ namespace GastosMensuales.Models
         public IDataAccess _data = new Sql();
         public void Crear(Ingreso ingreso)
         {
+            ServicioValidacion.Ingreso(ingreso);
             _data.CrearIngreso(ingreso);
         }
 

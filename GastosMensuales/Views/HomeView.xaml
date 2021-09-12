@@ -8,7 +8,8 @@
              xmlns:local="clr-namespace:GastosMensuales.Views"
              xmlns:ViewModel="clr-namespace:GastosMensuales.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="950">
+             d:DesignHeight="300" d:DesignWidth="800" 
+             >
     <Control.Resources>
         
         <ResourceDictionary>
@@ -29,7 +30,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
             <ComboBox 
                 Name="cmbPresupuestos"
@@ -47,9 +48,10 @@
                   IsEditable="True">
 
             </ComboBox>
+            
             <StackPanel Grid.Row="2">
                 <Label FontSize="20">Gastos</Label>
-            <DataGrid
+                <DataGrid
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   x:Name="dgGastos" 
                   SelectionUnit="FullRow"
@@ -58,10 +60,13 @@
                   IsReadOnly="True" 
                   CanUserAddRows="False" UseLayoutRounding="False" FontSize="18"/>
             </StackPanel>
-            <StackPanel Grid.Row="1">
+            
+            <StackPanel Grid.Row="1"
+                        VerticalAlignment="Stretch">
                 <Label FontSize="20">Ingresos</Label>
-                <DataGrid 
-                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                <DataGrid
+                  VerticalAlignment="Stretch"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                   x:Name="dgIngresos" 
                   SelectionUnit="FullRow"
                   ItemsSource="{Binding Path=TablaIngresos}"

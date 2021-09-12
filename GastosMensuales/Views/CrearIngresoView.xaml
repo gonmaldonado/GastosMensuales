@@ -24,7 +24,19 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <StackPanel Grid.Column="1">
+            <Label Name="lblMensaje" 
+                   Content="{Binding Path =Mensaje}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="15"
+                   Foreground="Red"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
             <Label Content="Nombre"
                    FontSize="20"/>
             <TextBox x:Name="txtNombre"
