@@ -179,5 +179,7 @@ namespace GastosMensuales.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+
     }
 }

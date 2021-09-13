@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:views="clr-namespace:GastosMensuales.Views"
+        xmlns:viewModels="clr-namespace:GastosMensuales.ViewModels"
+         xmlns:helpers="clr-namespace:GastosMensuales.Helpers"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:GastosMensuales" 
         mc:Ignorable="d"
         Icon ="/Icon/GastosMensuales.png"
-        Title="GastosMensuales" Height="850" Width="1100" WindowStartupLocation="CenterScreen">
+        Title="GastosMensuales" Height="750" Width="1100" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,6 +19,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                <views:HomeView />
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -62,11 +67,18 @@
             </DockPanel>
         </materialDesign:ColorZone>
         <ScrollViewer Grid.Row="1" Margin="10">
-            <ContentControl >
-                <Grid>
-                    <views:HomeView/>
-                </Grid>
-            </ContentControl>
+            <ContentPresenter 
+            Content="{Binding}">
+                <ContentPresenter.ContentTemplateSelector>
+                    <helpers:LayoutSelector>
+                        <helpers:LayoutSelector.BlankTemplate>
+                            <DataTemplate>
+
+                            </DataTemplate>
+                        </helpers:LayoutSelector.BlankTemplate>
+                    </helpers:LayoutSelector>
+                </ContentPresenter.ContentTemplateSelector>
+            </ContentPresenter>
         </ScrollViewer>
     </Grid>
 </Window>

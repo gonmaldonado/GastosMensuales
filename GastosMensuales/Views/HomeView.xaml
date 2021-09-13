@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:GastosMensuales.Views"
              xmlns:ViewModel="clr-namespace:GastosMensuales.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800" 
+             d:DesignHeight="500" d:DesignWidth="800" 
              >
     <Control.Resources>
         
