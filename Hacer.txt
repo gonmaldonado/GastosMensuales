@@ -1,5 +1,2 @@
--validaciones en CREAR / MODIFICAR
--CREAR GASTO
--CAMBIAR USER CONTROL en Main Windows
--USER CONTROL informe
 -RESOLVER PERIODICIDAD
+-Inyeccion de dependencia

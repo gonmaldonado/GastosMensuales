@@ -29,6 +29,22 @@ namespace GastosMensuales.Models.Services
             if (ingreso.Periodicidad == 0 || ingreso.Nombre == null || ingreso.Monto == 0 || ingreso.Descripcion == null)
                 throw new ApplicationException("Campos incompletos.");
         }
+        public static void EsFecha(string fecha)
+        {
+            try
+            {
+                DateTime.Parse(fecha);
+            }
+            catch
+            {
+                throw new ApplicationException("Fecha incorrecta.");
+            }
+        }
+        public static void Fechas(DateTime Desde, DateTime Hasta )
+        {
+            if (Desde > Hasta)
+                throw new ApplicationException("La fecha desde es mayor que la fecha hasta.");
+        }
 
     }
 }

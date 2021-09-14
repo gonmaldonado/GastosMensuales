@@ -85,8 +85,8 @@ namespace GastosMensuales.Infrastructure.DataAccess
 
         public void CrearPresupuesto(Presupuesto presupuesto)
         {
-            string sql = @" INSERT INTO Presupuestos (Año,Mes,Nombre,Ingresos,Gastos,Total) 
-				            SELECT @Año,@Mes,@Nombre,@Ingresos,@Gastos,@Total
+            string sql = @" INSERT INTO Presupuestos (Año,Mes,Nombre) 
+				            SELECT @Año,@Mes,@Nombre
 				            WHERE @Nombre NOT IN
 				            (
 					            SELECT Nombre
@@ -98,9 +98,6 @@ namespace GastosMensuales.Infrastructure.DataAccess
             objComAgregar.Parameters.AddWithValue("@Año", Convert.ToInt32(presupuesto.Año));
             objComAgregar.Parameters.AddWithValue("@Mes", Convert.ToInt32(presupuesto.Mes));
             objComAgregar.Parameters.AddWithValue("@Nombre", presupuesto.Nombre);
-            objComAgregar.Parameters.AddWithValue("@Ingresos", Convert.ToDecimal(presupuesto.Ingresos));
-            objComAgregar.Parameters.AddWithValue("@Gastos", Convert.ToDecimal(presupuesto.Gastos));
-            objComAgregar.Parameters.AddWithValue("@Total", Convert.ToDecimal(presupuesto.Total));
             objComAgregar.CommandType = CommandType.Text;
             try
             {
@@ -109,15 +106,12 @@ namespace GastosMensuales.Infrastructure.DataAccess
             }
             catch (SqlException)
             {
-
                 throw new ApplicationException("Error en conexion.");
             }
             finally
             {
-
                 if (objConexion.State == ConnectionState.Open)
                     objConexion.Close();
-
             }
         }
 
@@ -171,7 +165,25 @@ namespace GastosMensuales.Infrastructure.DataAccess
 
         public DataTable InformePrespuesto(string fechaDesde, string fechaHasta)
         {
-            throw new NotImplementedException();
+            DateTime Desde = Convert.ToDateTime(fechaDesde);
+            DateTime Hasta = Convert.ToDateTime(fechaHasta);
+            int MesDesde = Desde.Month;
+            int MesHasta = Hasta.Month;
+            int AñoDesde = Desde.Year;
+            int AñoHasta = Hasta.Year;
+            DataTable dt = new DataTable();
+            string sql = @" SELECT p.Año 'Año',p.Mes 'Mes',p.Nombre 'Prespuesto', SUM(ingresos.Monto) AS Ingresos,SUM(gastos.Monto)AS Gastos, (SUM(ingresos.Monto)-SUM(gastos.Monto)) AS 'Total'
+                            FROM Presupuestos p 
+                            INNER JOIN R_PresupuestoGasto g on p.Id=g.Id_Presupuesto
+                            INNER JOIN R_PresupuestoIngreso i on p.Id=i.Id_Presupuesto
+                            INNER JOIN Ingresos ingresos on i.Id_Ingreso = ingresos.Id
+                            INNER JOIN Gastos gastos on g.Id_Gasto = gastos.Id " +
+                            @"WHERE (p.Año BETWEEN " +AñoDesde+" AND "+AñoHasta+ ") AND (p.Mes BETWEEN " +MesDesde+" AND "+MesHasta+")"+
+                            "GROUP BY p.Año,p.Mes,p.Nombre,ingresos.Monto,gastos.Monto";
+            SqlDataAdapter objDaTraer = new SqlDataAdapter(sql, strConexion);
+            objDaTraer.SelectCommand.CommandType = CommandType.Text;
+            objDaTraer.Fill(dt);
+            return dt;
         }
 
         public void ModificarGasto(Gasto gasto)
@@ -181,8 +193,7 @@ namespace GastosMensuales.Infrastructure.DataAccess
                             SET Nombre = @Nombre, 
                                 Descripcion = @Descripcion, 
                                 Monto = @Monto, 
-                                Periodicidad = @Periodicidad, 
-                                TipoMonto = @TipoMonto
+                                Periodicidad = @Periodicidad 
                              WHERE id = @Id;";
 
             SqlConnection objConexion = new SqlConnection(strConexion);

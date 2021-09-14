@@ -324,10 +324,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\Container.cs" />
-    <Compile Include="Helpers\FactoryViewModel.cs" />
-    <Compile Include="Helpers\LayoutSelector.cs" />
-    <Compile Include="Helpers\Publisher.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Infrastructure\DataAccess\Sql.cs" />
     <Compile Include="Interfaces\IDataAccess.cs" />
@@ -339,6 +335,7 @@
     <Compile Include="Models\Domain\Ingreso.cs" />
     <Compile Include="Models\Domain\Presupuesto.cs" />
     <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\InformeModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\Services\ServicioPresupuesto.cs" />
     <Compile Include="Models\Services\ServicioValidacion.cs" />
@@ -347,8 +344,8 @@
     <Compile Include="ViewModels\DetalleGastoViewModel.cs" />
     <Compile Include="ViewModels\DetalleIngresoViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\InformeViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Helpers\ViewNavigator.cs" />
     <Compile Include="Views\DetalleGastoView.xaml.cs">
       <DependentUpon>DetalleGastoView.xaml</DependentUpon>
     </Compile>

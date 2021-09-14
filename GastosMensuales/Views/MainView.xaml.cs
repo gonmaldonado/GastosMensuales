@@ -22,22 +22,22 @@ namespace GastosMensuales.Views
     /// </summary>
     public partial class MainView : Window
     {
-        private ViewNavigator _viewNavigator;
+
         public MainView()
         {
             InitializeComponent();
+            DataContext = new HomeView();
 
-            _viewNavigator = Container.ViewNavigator();
-            _viewNavigator.NavigationChanged += OnNavigationChanged;
-
-            DataContext = FactoryViewModel.Build("LOGIN");
         }
-
-        private void OnNavigationChanged(object sender, System.EventArgs e)
+        private void HomeView_Clicked(object sender, RoutedEventArgs e)
         {
-            NavigationEventArgs eventArgs = (NavigationEventArgs)e;
-
-            DataContext = FactoryViewModel.Build(eventArgs.NavigationName);
+            DataContext = new HomeView();
         }
+
+        private void InformeView_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = new InformeView();
+        }
+
     }
 }

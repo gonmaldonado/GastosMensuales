@@ -3,10 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
              xmlns:local="clr-namespace:GastosMensuales.Views"
+             xmlns:ViewModel="clr-namespace:GastosMensuales.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="500" d:DesignWidth="800" >
+    <Control.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Control.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="6*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="*"/>
+                <RowDefinition Height ="6*"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <Label Name="lblMensaje" 
+                       Content="{Binding Path =Mensaje}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       Foreground="Red"/>
+            </StackPanel>
+            <DockPanel Grid.Row="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                <Label FontSize="20">Desde:</Label>
+                <DatePicker
+                  Text="{Binding Desde,Mode=TwoWay}"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  FontSize="15"
+                  Width="180"
+                  materialDesign:HintAssist.Hint="Pick Date"/>
+                <Label FontSize="20">Hasta:</Label>
+                <DatePicker
+                  Text="{Binding Hasta,Mode=TwoWay}"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  FontSize="15"
+                  Width="180"
+                  materialDesign:HintAssist.Hint="Pick Date"/>
+                <Button
+                        Content="Buscar"
+                        Padding="0"
+                        Height="40"
+                        Width="150"
+                        Background="PaleTurquoise"
+                        Command="{Binding Path = CrearInformeCommand}"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="25"
+                        IsEnabled="true"/>
+            </DockPanel>
+        </Grid>
+        <StackPanel Grid.Row="1"
+                        VerticalAlignment="Stretch">
+            <Label FontSize="20">Infrome</Label>
+            <DataGrid
+                  VerticalAlignment="Stretch"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  x:Name="dgIngresos" 
+                  SelectionUnit="FullRow"
+                  ItemsSource="{Binding Path=TablaInforme}"
+                  IsReadOnly="True" 
+                  CanUserAddRows="False" UseLayoutRounding="False" FontSize="18"/>
+        </StackPanel>
     </Grid>
 </UserControl>

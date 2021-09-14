@@ -81,9 +81,6 @@ namespace GastosMensuales.Models.Services
             presupuesto.Año = AñoActual();
             presupuesto.Mes = MesActual();
             presupuesto.Nombre = GenerarNombre();
-            presupuesto.Ingresos = 0;
-            presupuesto.Gastos = 0;
-            presupuesto.Total = 0;
             try
             {
                 _data.CrearPresupuesto(presupuesto);

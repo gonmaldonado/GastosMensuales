@@ -46,6 +46,7 @@
                     <Button
                                 Margin="16,0,0,0"
                                 ToolTip="Home"
+                                Click="HomeView_Clicked"
                                 Command="{Binding HomeCommand}"
                                 Content="{materialDesign:PackIcon Kind=Home, Size=24}"
                                 Style="{DynamicResource MaterialDesignToolButton}"
@@ -53,6 +54,7 @@
                     <Button
                                 Margin="16,0,0,0"
                                 ToolTip="Informe"
+                                Click="InformeView_Clicked"
                                 Command="{Binding HomeCommand}"
                                 Content="{materialDesign:PackIcon Kind=ChartFinance, Size=24}"
                                 Style="{DynamicResource MaterialDesignToolButton}"
@@ -67,18 +69,8 @@
             </DockPanel>
         </materialDesign:ColorZone>
         <ScrollViewer Grid.Row="1" Margin="10">
-            <ContentPresenter 
-            Content="{Binding}">
-                <ContentPresenter.ContentTemplateSelector>
-                    <helpers:LayoutSelector>
-                        <helpers:LayoutSelector.BlankTemplate>
-                            <DataTemplate>
-
-                            </DataTemplate>
-                        </helpers:LayoutSelector.BlankTemplate>
-                    </helpers:LayoutSelector>
-                </ContentPresenter.ContentTemplateSelector>
-            </ContentPresenter>
+            <ContentControl
+            Content="{Binding}"/>
         </ScrollViewer>
     </Grid>
 </Window>
