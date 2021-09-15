@@ -18,8 +18,22 @@ namespace GastosMensuales.Models
         public void Crear(Ingreso ingreso)
         {
             ServicioValidacion.Ingreso(ingreso);
-            _data.CrearIngreso(ingreso);
+            if (ingreso.Periodicidad > 1)
+            {
+                ServicioPresupuesto.Crear(ingreso.Periodicidad);
+                int periodicidad = ingreso.Periodicidad;
+                int presupuesto = ingreso.IdPresupuesto;
+                for (int i = 0; i < periodicidad; i++)
+                {
+                    ingreso.Periodicidad = periodicidad - i;
+                    ingreso.IdPresupuesto = presupuesto + i;
+                    _data.CrearIngreso(ingreso);
+                }
+            }
+            else
+            {
+                _data.CrearIngreso(ingreso);
+            }
         }
-
     }
 }

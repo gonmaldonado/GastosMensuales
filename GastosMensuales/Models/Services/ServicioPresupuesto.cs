@@ -28,6 +28,12 @@ namespace GastosMensuales.Models.Services
             string año = AñoActual().ToString();
             return mes + "_" + año;
         }
+        public static string GenerarNombre(int mes,int año)
+        {
+            string Mes = NombreMes(mes);
+            string Año = año.ToString();
+            return Mes + "_" + Año;
+        }
         public static string NombreMes(int mes)
         {
             switch (mes)
@@ -57,23 +63,23 @@ namespace GastosMensuales.Models.Services
                 case 12:
                     return "DICIEMBRE";
                 default:
-                    throw new ApplicationException("Error al crear nombre de pres");
+                    throw new ApplicationException("Error al crear nombre de presupuesto.");
             }
         }
         public static string PresupuestoActual()
         {
-            string ultimo = _data.TraerUltmoPresupuesto();
+            string ultimo = _data.TraerPresupuesto(MesActual());
             if ( ultimo == null)
             {
                 Crear();
-                ultimo = _data.TraerUltmoPresupuesto();
+                ultimo = _data.TraerPresupuesto(MesActual());
             }
             return ultimo;
                
         }
         public static int IdPresupuestoActual()
         {
-            return _data.TraerUltmoIdPresupuesto();
+            return _data.TraerIdPresupuesto(MesActual());
         }
         public static void Crear()
         {
@@ -81,6 +87,23 @@ namespace GastosMensuales.Models.Services
             presupuesto.Año = AñoActual();
             presupuesto.Mes = MesActual();
             presupuesto.Nombre = GenerarNombre();
+            try
+            {
+                _data.CrearPresupuesto(presupuesto);
+
+            }
+            catch (Exception)
+            {
+
+                throw new ApplicationException("Error al crear presupuesto.");
+            }
+        }
+        public static void Crear(int mes, int año)
+        {
+            Presupuesto presupuesto = new Presupuesto();
+            presupuesto.Año = año;
+            presupuesto.Mes = mes;
+            presupuesto.Nombre = GenerarNombre(mes,año);
             try
             {
                 _data.CrearPresupuesto(presupuesto);
@@ -100,6 +123,27 @@ namespace GastosMensuales.Models.Services
             {
                 Crear();
             }
+        }
+        public static void Crear(int periodicidad)
+        {
+            for (int i = 0; i < periodicidad; i++)
+            {
+                Presupuesto presupuesto = new Presupuesto();
+                presupuesto.Año = (MesActual() + i <= 12 ? AñoActual() : AñoActual() + 1);
+                presupuesto.Mes = MesActual() + i > 12 ? (MesActual() + i) - 12 : MesActual() + i;
+                presupuesto.Nombre = GenerarNombre(presupuesto.Mes,presupuesto.Año);
+                try
+                {
+                    _data.CrearPresupuesto(presupuesto);
+
+                }
+                catch (Exception)
+                {
+
+                    throw new ApplicationException("Error al crear presupuesto.");
+                }
+            }
+            
         }
     }
 

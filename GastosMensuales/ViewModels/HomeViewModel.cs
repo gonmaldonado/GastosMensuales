@@ -38,6 +38,7 @@ namespace GastosMensuales.ViewModels
         {
             TablaGastos = _model.TablaGastos(Presupuesto);
             TablaIngresos = _model.TablaIngresos(Presupuesto);
+            ListaPresupuestos = _model.ListarPresupuestos();
             Gastos = _model.TotalMonto(TablaGastos);
             Ingresos = _model.TotalMonto(TablaIngresos);
             Total = _model.Total(Ingresos, Gastos);

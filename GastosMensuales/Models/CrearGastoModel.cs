@@ -16,7 +16,22 @@ namespace GastosMensuales.Models
         public void Crear(Gasto gasto)
         {
             ServicioValidacion.Gasto(gasto);
-            _data.CrearGasto(gasto);
+            if (gasto.Periodicidad > 1)
+            {
+                ServicioPresupuesto.Crear(gasto.Periodicidad);
+                int periodicidad = gasto.Periodicidad;
+                int presupuesto = gasto.IdPresupuesto;
+                for (int i = 0; i < periodicidad; i++)
+                {
+                    gasto.Periodicidad = periodicidad - i;
+                    gasto.IdPresupuesto = presupuesto + i;
+                    _data.CrearGasto(gasto);
+                }
+            }
+            else
+            {
+                _data.CrearGasto(gasto);
+            }
         }
     }
 }

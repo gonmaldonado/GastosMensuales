@@ -448,5 +448,38 @@ namespace GastosMensuales.Infrastructure.DataAccess
             }
         }
 
+        public string TraerPresupuesto(int mes)
+        {
+            string presupuesto;
+            string sql = "SELECT TOP (1) Nombre FROM Presupuestos WHERE Mes = " + mes + " ORDER BY Id DESC ";
+            SqlConnection objConexion = new SqlConnection(strConexion);
+            SqlCommand objComTraer = new SqlCommand(sql, objConexion);
+            objComTraer.CommandType = CommandType.Text;
+            objConexion.Open();
+            if (objComTraer.ExecuteScalar() != null)
+            {
+                presupuesto = objComTraer.ExecuteScalar().ToString();
+            }
+            else
+            {
+                presupuesto = null;
+            }
+            objConexion.Close();
+
+            return presupuesto;
+        }
+        public int TraerIdPresupuesto(int mes)
+        {
+            int presupuesto;
+            string sql = "SELECT TOP (1) Id FROM Presupuestos WHERE Mes = " + mes + " ORDER BY Id DESC ";
+            SqlConnection objConexion = new SqlConnection(strConexion);
+            SqlCommand objComTraer = new SqlCommand(sql, objConexion);
+            objComTraer.CommandType = CommandType.Text;
+            objConexion.Open();
+            presupuesto = Convert.ToInt32(objComTraer.ExecuteScalar().ToString());
+            objConexion.Close();
+            return presupuesto;
+        }
+
     }
 }

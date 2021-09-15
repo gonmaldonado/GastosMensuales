@@ -38,7 +38,7 @@
                   HorizontalAlignment="Left"
                   FontSize="15"
                   ItemsSource="{Binding ListaPresupuestos, Mode=OneWay}"
-                  Text="{Binding Presupuesto}"
+                  Text="{Binding Presupuesto,Mode=TwoWay}"
                   DisplayMemberPath="Nombre"
                   Padding="10"
                   Height="40"
