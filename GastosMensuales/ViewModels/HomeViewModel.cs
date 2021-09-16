@@ -24,15 +24,26 @@ namespace GastosMensuales.ViewModels
         private ICommand _crearGasto;
         public event PropertyChangedEventHandler PropertyChanged;
         public static readonly HomeModel _model = new HomeModel();
-        public static string _presupuesto = _model.PresupestoActual();
+        public static string _presupuesto;
         public static object _seleccionarGasto;
         public static object _seleccionarIngreso;
-        protected static DataTable _tablaGastos = _model.TablaGastos(_presupuesto);
-        protected static DataTable _tablaIngresos = _model.TablaIngresos(_presupuesto);
-        protected static decimal _ingresos = _model.TotalMonto(_tablaIngresos);
-        protected static decimal _gastos = _model.TotalMonto(_tablaGastos);
-        protected decimal _total = _model.Total(_ingresos, _gastos);
-        protected DataTable _listaPresupuestos = _model.ListarPresupuestos();
+        protected static DataTable _tablaGastos;
+        protected static DataTable _tablaIngresos;
+        protected static decimal _ingresos;
+        protected static decimal _gastos;
+        protected decimal _total;
+        protected DataTable _listaPresupuestos;
+
+        public HomeViewModel()
+        {
+            Presupuesto = _model.PresupestoActual();
+            TablaGastos = _model.TablaGastos(Presupuesto); 
+            TablaIngresos = _model.TablaIngresos(Presupuesto);
+            Ingresos = _model.TotalMonto(TablaIngresos);
+            Gastos = _model.TotalMonto(TablaGastos);
+            Total = _model.Total(Ingresos, Gastos);
+            ListaPresupuestos = _model.ListarPresupuestos();
+        }
 
         public void Actualizar()
         {

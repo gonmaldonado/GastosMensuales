@@ -172,14 +172,28 @@ namespace GastosMensuales.Infrastructure.DataAccess
             int AñoDesde = Desde.Year;
             int AñoHasta = Hasta.Year;
             DataTable dt = new DataTable();
-            string sql = @" SELECT p.Año 'Año',p.Mes 'Mes',p.Nombre 'Prespuesto', SUM(ingresos.Monto) AS Ingresos,SUM(gastos.Monto)AS Gastos, (SUM(ingresos.Monto)-SUM(gastos.Monto)) AS 'Total'
-                            FROM Presupuestos p 
-                            INNER JOIN R_PresupuestoGasto g on p.Id=g.Id_Presupuesto
-                            INNER JOIN R_PresupuestoIngreso i on p.Id=i.Id_Presupuesto
-                            INNER JOIN Ingresos ingresos on i.Id_Ingreso = ingresos.Id
-                            INNER JOIN Gastos gastos on g.Id_Gasto = gastos.Id " +
-                            @"WHERE (p.Año BETWEEN " +AñoDesde+" AND "+AñoHasta+ ") AND (p.Mes BETWEEN " +MesDesde+" AND "+MesHasta+")"+
-                            "GROUP BY p.Año,p.Mes,p.Nombre,ingresos.Monto,gastos.Monto";
+            DateTime desde = new DateTime(AñoDesde,MesDesde,1);
+                string sql = @" ;WITH CTE AS
+                                    (SELECT 
+                                    Fecha =    CAST(
+                                          CAST(p.Año AS VARCHAR(4)) +
+                                          RIGHT('0' + CAST(p.Mes AS VARCHAR(2)), 2) +
+                                          RIGHT('0' + CAST(1 AS VARCHAR(2)), 2) AS DATETIME), 
+                                    Año = p.Año ,
+                                    Mes = p.Mes ,
+                                    Presupuesto = p.Nombre, 
+                                    Ingreso = IIF(ingresos.Monto IS NULL,0,SUM(ingresos.Monto)),
+                                    Gasto= IIF(gastos.Monto IS NULL,0,SUM(gastos.Monto))
+                                    FROM Presupuestos p 
+                                    full JOIN R_PresupuestoGasto g on p.Id=g.Id_Presupuesto
+                                    full JOIN R_PresupuestoIngreso i on p.Id=i.Id_Presupuesto
+                                    full JOIN Ingresos ingresos on i.Id_Ingreso = ingresos.Id
+                                    full JOIN Gastos gastos on g.Id_Gasto = gastos.Id                           
+                                    GROUP BY p.Año,p.Mes,p.Nombre,ingresos.Monto,gastos.Monto
+							        )
+                                        Select Año,Mes,Presupuesto,Ingreso,Gasto,Ingreso-Gasto AS TOTAL FROM CTE
+							             WHERE Fecha BETWEEN CONVERT(datetime, '" + desde.ToShortDateString() + "', 103)  AND CONVERT(datetime, '" + Hasta.ToShortDateString() + "', 103)";
+            
             SqlDataAdapter objDaTraer = new SqlDataAdapter(sql, strConexion);
             objDaTraer.SelectCommand.CommandType = CommandType.Text;
             objDaTraer.Fill(dt);

@@ -22,6 +22,15 @@ namespace GastosMensuales.ViewModels
         public static string _mensaje;
         public static string _desde;
         public static string _hasta;
+
+        public InformeViewModel()
+        {
+            TablaInforme = null;
+            Desde = null;
+            Hasta = null;
+        }
+        
+        
         public string Desde
         {
             get { return _desde; }
