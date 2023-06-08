@@ -923,3 +923,4 @@ E:\GastosMensuales\GastosMensuales\GastosMensuales\obj\Debug\GastosMensuales.csp
 E:\GastosMensuales\GastosMensuales\GastosMensuales\obj\Debug\GastosMensuales.csproj.CopyComplete
 E:\GastosMensuales\GastosMensuales\GastosMensuales\obj\Debug\GastosMensuales.exe
 E:\GastosMensuales\GastosMensuales\GastosMensuales\obj\Debug\GastosMensuales.pdb
+C:\Kaizenet\Developments\C#\WPF\GastosMensuales\GastosMensuales\obj\Debug\GastosMensuales.csproj.SuggestedBindingRedirects.cache
